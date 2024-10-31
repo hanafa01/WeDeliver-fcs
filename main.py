@@ -1,13 +1,26 @@
 class Drivers:
     def __init__(self):
-        self.drivers = [['ID001', 'User1', 'Beirut'], ['ID002', 'User2', 'Akkar']]
+        # self.drivers = [['ID001', 'User1', 'Beirut'], ['ID002', 'User2', 'Akkar']]
+        self.drivers = []
+        # self.drivers = [
+        #     {
+        #         'id': 'ID001',
+        #         'name': 'User1',
+        #         'start_city': 'Beirut'
+        #     },
+        #     {
+        #         'id': 'ID002',
+        #         'name': 'User2',
+        #         'start_city': 'Akkar'
+        #     }
+        # ]
         self.total_drivers = len(self.drivers)
 
     def viewDrivers(self):
         if self.drivers:
             print("Drivers :")
             for d in self.drivers:
-                print(f"{d[0]}, {d[1]}, {d[2]}")
+                print(f"{d["id"]}, {d["name"]}, {d["start_city"]}")
         else:
             print("No drivers available")
 
@@ -47,7 +60,7 @@ class Drivers:
         #add driver
         generatedId = self.generateDriverID()
 
-        new_driver = [generatedId, name, start_city]
+        new_driver = { "id": generatedId, "name": name, "start_city": start_city }
         self.drivers.append(new_driver)
 
         print("New Driver added: ")
@@ -58,9 +71,9 @@ class Drivers:
     def checkSimilarDriver(self):
         dic = {}
         for driver in self.drivers:
-            if driver[2] not in dic:
-                dic[driver[2]] = [] #city: [drivers]  
-            dic[driver[2]].append(driver[1])
+            if driver["start_city"] not in dic:
+                dic[driver["start_city"]] = [] #city: [drivers]  
+            dic[driver["start_city"]].append(driver["name"])
 
         for start_city, drivers in dic.items():
             print(f"{start_city}: {', '.join(drivers)}")
