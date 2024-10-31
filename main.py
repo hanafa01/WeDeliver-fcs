@@ -86,15 +86,12 @@ class Cities:
         self.graph_cities = {}
 
     def viewCities(self): #Timesort algoithm by Python O(nlogn)
-        cities = list(self.graph_cities.keys())
-
-        cities.sort()
-        for c in cities:
-            print(c)
+        sorted_cities = sorted(self.graph_cities.keys(), reverse=True)
+        print(", ".join(sorted_cities))
 
     #another way
     def viewCities2(self): #MergeSort O(nlogn)
-        print(mergeSort(list(self.graph_cities.keys()), 0, len(self.graph_cities) - 1))
+        print(", ".join(mergeSort(list(self.graph_cities.keys()), 0, len(self.graph_cities) - 1)))
 
     def searchCity(self, city):
         pass
@@ -163,7 +160,7 @@ def citiesMenu():
             print("Please enter a number: 1, 2, 3, 4, 5: ")
         else:
             if user_input == '1':
-                c.viewCities()
+                c.viewCities2()
             elif user_input == '2':
                 c.searchCity('d')
             elif user_input == '3':
@@ -217,7 +214,7 @@ def merge(l, start, end):
     j = mid+1
     temp = []
     while i<= mid and j <= end:
-        if l[i] < l[j]:
+        if l[i] > l[j]:
             temp.append(l[i])
             i += 1
         else:
