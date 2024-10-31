@@ -1,6 +1,6 @@
 class Drivers:
     def __init__(self):
-        self.drivers = []
+        self.drivers = [['ID001', 'User1', 'Beirut'], ['ID002', 'User2', 'Akkar']]
         self.total_drivers = len(self.drivers)
 
     def viewDrivers(self):
@@ -46,6 +46,7 @@ class Drivers:
         
         #add driver
         generatedId = self.generateDriverID()
+
         new_driver = [generatedId, name, start_city]
         self.drivers.append(new_driver)
 
@@ -65,7 +66,9 @@ class Drivers:
             print(f"{start_city}: {', '.join(drivers)}")
 
     def generateDriverID(self):
+        self.total_drivers += 1
         return f"ID{self.total_drivers:03}"
+    
 class Cities:
     def __init__(self):
         # self.graph_cities = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': []}
@@ -208,5 +211,5 @@ c.addEdge("Byblos", "Jounieh")
 c.addEdge("Sidon", "Tyre")
 c.addEdge("Zahle", "Baalbek")
 
-print(c.graph_cities)
+# print(c.graph_cities)
 main()
