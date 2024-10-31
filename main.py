@@ -1,6 +1,5 @@
 class Drivers:
     def __init__(self):
-        # self.drivers = [['ID001', 'User1', 'Beirut'], ['ID002', 'User2', 'Akkar']]
         self.drivers = []
         # self.drivers = [
         #     {
@@ -57,7 +56,7 @@ class Drivers:
                 c.graph_cities[start_city] = []
                 print(f"{start_city} added, adding the driver..")
         
-        #add driver
+        #add a driver
         generatedId = self.generateDriverID()
 
         new_driver = { "id": generatedId, "name": name, "start_city": start_city }
@@ -81,14 +80,21 @@ class Drivers:
     def generateDriverID(self):
         self.total_drivers += 1
         return f"ID{self.total_drivers:03}"
-    
 class Cities:
     def __init__(self):
         # self.graph_cities = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': []}
         self.graph_cities = {}
 
-    def viewCities(self):
-        pass
+    def viewCities(self): #Timesort algoithm by Python O(nlogn)
+        cities = list(self.graph_cities.keys())
+
+        cities.sort()
+        for c in cities:
+            print(c)
+
+    #another way
+    def viewCities2(self): #MergeSort O(nlogn)
+        print(mergeSort(list(self.graph_cities.keys()), 0, len(self.graph_cities) - 1))
 
     def searchCity(self, city):
         pass
@@ -118,7 +124,6 @@ class Cities:
         else:
             self.graph_cities[city1].append(city2)
             self.graph_cities[city2].append(city1)
-
 
 def driversMenu():
     while True:
@@ -194,6 +199,40 @@ def main():
                 break
             else:
                 print("Please choose 1, 2, or 3: ")
+
+def mergeSort(list1, start, end):
+    if start == end:
+        return 
+    mid = (start + end) // 2
+
+    mergeSort(list1, start, mid)
+    mergeSort(list1, mid+1, end)
+
+    merge(list1, start, end)
+    return list1
+
+def merge(l, start, end):
+    mid = (start + end) // 2
+    i = start
+    j = mid+1
+    temp = []
+    while i<= mid and j <= end:
+        if l[i] < l[j]:
+            temp.append(l[i])
+            i += 1
+        else:
+            temp.append(l[j])
+            j += 1
+
+    while i<= mid:
+        temp.append(l[i])
+        i += 1
+
+    while j <= end:
+        temp.append(l[j])
+        j += 1
+
+    l[start:end+1] = temp
 
 d = Drivers()
 c = Cities()
