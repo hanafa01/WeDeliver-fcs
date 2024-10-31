@@ -1,3 +1,40 @@
+class Drivers:
+    def __init__(self):
+        self.drivers = []
+        self.total_drivers = len(self.drivers)
+
+    def viewDrivers(self):
+        pass
+
+    def addDriver(self, name):
+        pass
+
+    def checkSimilarDriver(self):
+        pass
+
+    def generateDriverID(self):
+        pass
+class Cities:
+    def __init__(self):
+        # self.graph_cities = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': []}
+        self.graph_cities = {}
+
+    def viewCities(self):
+        pass
+
+    def searchCity(self, city):
+        pass
+
+    def printNeighboringCities(self):
+        pass
+
+    def printDriversByCity(self):
+        pass
+
+    def checkCityAvailability(self, city_name):
+        pass
+
+
 def driversMenu():
     while True:
         print("1. View all Drivers")
@@ -11,11 +48,12 @@ def driversMenu():
             print("Please enter a number: 1, 2, 3, 4: ")
         else:
             if user_input == '1':
-                print('view')
+                d.viewDrivers()
             elif user_input == '2':
-                print('add')
+                name = input("Enter the Driver's name: ")
+                d.addDriver(name)
             elif user_input == '3':
-                print('check')
+                d.checkSimilarDriver()
             elif user_input == '4':
                 break
             else:
@@ -35,13 +73,13 @@ def citiesMenu():
             print("Please enter a number: 1, 2, 3, 4, 5: ")
         else:
             if user_input == '1':
-                print('view')
+                c.viewCities()
             elif user_input == '2':
-                print('search')
+                c.searchCity('d')
             elif user_input == '3':
-                print('print')
+                c.printNeighboringCities()
             elif user_input == '4':
-                print('print')
+                c.printDriversByCity()
             elif user_input == '5':
                 break
             else:
@@ -71,5 +109,8 @@ def main():
                 break
             else:
                 print("Please choose 1, 2, or 3: ")
+
+d = Drivers()
+c = Cities()
 
 main()
