@@ -84,7 +84,9 @@ class Cities:
         pass
 
     def checkCityAvailability(self, city_name):
-        pass
+        if city_name in self.graph_cities:
+            return True #available
+        return False #not available
 
     def addCityNode(self, start_city):
         if start_city in self.graph_cities:
