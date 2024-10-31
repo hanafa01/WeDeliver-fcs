@@ -4,16 +4,68 @@ class Drivers:
         self.total_drivers = len(self.drivers)
 
     def viewDrivers(self):
-        pass
+        if self.drivers:
+            print("Drivers :")
+            for d in self.drivers:
+                print(f"{d[0]}, {d[1]}, {d[2]}")
+        else:
+            print("No drivers available")
 
     def addDriver(self, name):
-        pass
+        start_city = input("Enter the start city of the driver: ")
+
+        if not c.checkCityAvailability(start_city):
+            print(f"Would you like to add the city '{start_city}' to our system? ")
+
+            while True:
+                user_input = input().strip().lower()
+                if user_input not in ['yes', 'no']:
+                    print("Please enter yes or no")
+                else:
+                    break
+
+            if user_input == 'no':
+                print("Would you like to add another start city name ? ")
+                
+                while True:
+                    user_input = input().strip().lower()  
+                    if user_input not in ['yes', 'no']:
+                        print("Please enter yes or no")
+                    else:
+                        break
+                
+                if user_input == 'yes':
+                    self.addDriver(name)
+                else:
+                    print("Nothing to add, back to the menu.")
+                    return
+            else:
+                #yes add the city to the system
+                c.graph_cities[start_city] = []
+                print(f"{start_city} added, adding the driver..")
+        
+        #add driver
+        generatedId = self.generateDriverID()
+        new_driver = [generatedId, name, start_city]
+        self.drivers.append(new_driver)
+
+        print("New Driver added: ")
+        print("ID: ", generatedId)
+        print("Name: ", name)
+        print("Start City: ", start_city)
 
     def checkSimilarDriver(self):
-        pass
+        dic = {}
+        for driver in self.drivers:
+            if driver[2] not in dic:
+                dic[driver[2]] = [] #city: [drivers]  
+            dic[driver[2]].append(driver[1])
+
+        for start_city, drivers in dic.items():
+            print(f"{start_city}: {', '.join(drivers)}")
 
     def generateDriverID(self):
-        pass
+        return f"ID{self.total_drivers:03}"
 class Cities:
     def __init__(self):
         # self.graph_cities = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': []}
