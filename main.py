@@ -97,11 +97,29 @@ class Cities:
     def viewCities2(self): #MergeSort O(nlogn)
         print(mergeSort(list(self.graph_cities.keys()), 0, len(self.graph_cities) - 1))
 
-    def searchCity(self, city):
-        pass
+    def searchCity(self, search_city):
+        cities = self.graph_cities.keys()
 
-    def printNeighboringCities(self):
-        pass
+        l = []
+        for c in cities:
+            if search_city in c:
+                l.append(c)
+        
+        if l:
+            print(", ".join(l))
+        else:
+            print("No cities found.")
+
+    def printNeighboringCities(self, city):
+        if city not in self.graph_cities:
+            print(f"City '{city}' not available in the system.")
+            return
+        
+        neighbors = self.graph_cities[city]
+        if neighbors:
+            print(f"Neighbors of the city '{city}': {", ".join(neighbors)}")
+        else:
+            print(f"No neighbors found for the city '{city}'.")
 
     def printDriversByCity(self):
         pass
@@ -166,9 +184,11 @@ def citiesMenu():
             if user_input == '1':
                 c.viewCities()
             elif user_input == '2':
-                c.searchCity('d')
+                key = input("Enter a key to search cities: ")
+                c.searchCity(key)
             elif user_input == '3':
-                c.printNeighboringCities()
+                city_name = input("Enter the city name to prints all cities that can be reached from: ")
+                c.printNeighboringCities(city_name)
             elif user_input == '4':
                 c.printDriversByCity()
             elif user_input == '5':
