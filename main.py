@@ -93,10 +93,6 @@ class Cities:
         sorted_cities = sorted(self.graph_cities.keys(), reverse=True)
         print(", ".join(sorted_cities))
 
-    #another way
-    def viewCities2(self): #MergeSort O(nlogn)
-        print(mergeSort(list(self.graph_cities.keys()), 0, len(self.graph_cities) - 1))
-
     def searchCity(self, search_city):
         cities = self.graph_cities.keys()
 
@@ -220,40 +216,6 @@ def main():
                 break
             else:
                 print("Please choose 1, 2, or 3: ")
-
-def mergeSort(list1, start, end):
-    if start == end:
-        return 
-    mid = (start + end) // 2
-
-    mergeSort(list1, start, mid)
-    mergeSort(list1, mid+1, end)
-
-    merge(list1, start, end)
-    return list1
-
-def merge(l, start, end):
-    mid = (start + end) // 2
-    i = start
-    j = mid+1
-    temp = []
-    while i<= mid and j <= end:
-        if l[i] < l[j]:
-            temp.append(l[i])
-            i += 1
-        else:
-            temp.append(l[j])
-            j += 1
-
-    while i<= mid:
-        temp.append(l[i])
-        i += 1
-
-    while j <= end:
-        temp.append(l[j])
-        j += 1
-
-    l[start:end+1] = temp
 
 d = Drivers()
 c = Cities()
