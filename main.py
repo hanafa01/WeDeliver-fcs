@@ -34,6 +34,21 @@ class Cities:
     def checkCityAvailability(self, city_name):
         pass
 
+    def addCityNode(self, start_city):
+        if start_city in self.graph_cities:
+            print(start_city, "is already present in the cities graph.")
+        else:
+            self.graph_cities[start_city] = []
+    
+    def addEdge(self, city1, city2):
+        if city1 not in self.graph_cities:
+             print(city1, "is not present in the cities graph_cities")
+        elif city2 not in self.graph_cities:
+             print(city2, "is not present in the cities graph")
+        else:
+            self.graph_cities[city1].append(city2)
+            self.graph_cities[city2].append(city1)
+
 
 def driversMenu():
     while True:
@@ -113,4 +128,31 @@ def main():
 d = Drivers()
 c = Cities()
 
+c.addCityNode("Beirut")
+c.addCityNode("Tripoli")
+c.addCityNode("Sidon")
+c.addCityNode("Byblos")
+c.addCityNode("Zahle")
+c.addCityNode("Jounieh")
+c.addCityNode("Baalbek")
+c.addCityNode("Tyre")
+c.addCityNode("Batroun")
+c.addCityNode("Akkar")
+c.addCityNode("Bshare")
+c.addCityNode("Jbeil")
+
+c.addEdge("Beirut", "Tripoli")
+c.addEdge("Beirut", "Sidon")
+c.addEdge("Beirut", "Byblos")
+c.addEdge("Beirut", "Jounieh")
+c.addEdge("Beirut", "Zahle")
+c.addEdge("Tripoli", "Byblos")
+c.addEdge("Tripoli", "Akkar")
+c.addEdge("Tripoli", "Batroun")
+c.addEdge("Akkar", "Bshare")
+c.addEdge("Byblos", "Jounieh")
+c.addEdge("Sidon", "Tyre")
+c.addEdge("Zahle", "Baalbek")
+
+print(c.graph_cities)
 main()
