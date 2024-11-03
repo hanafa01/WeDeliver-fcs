@@ -1,6 +1,17 @@
 class Drivers:
     def __init__(self):
-        self.drivers = []
+        self.drivers = [
+            {"id": "ID001", "name": "User1", "start_city": "K"},
+            {"id": "ID002", "name": "User2", "start_city": "B"},
+            {"id": "ID003", "name": "User3", "start_city": "F"},
+            {"id": "ID004", "name": "User4", "start_city": "W"},
+            {"id": "ID005", "name": "User5", "start_city": "B"},
+            {"id": "ID006", "name": "User6", "start_city": "G"},
+            {"id": "ID007", "name": "User7", "start_city": "K"},
+            {"id": "ID008", "name": "User8", "start_city": "O"},
+            {"id": "ID009", "name": "User9", "start_city": "B"},
+        ]
+        
         # self.drivers = [
         #     {
         #         'id': 'ID001',
@@ -115,8 +126,44 @@ class Cities:
         else:
             print(f"\nNo neighbors found for the city '{city}'.")
 
-    def printDriversByCity(self):
-        pass
+    def printDriversReachedByCity(self, city_name):
+        city_name = city_name.strip().lower().capitalize()
+        
+        if city_name in self.graph_cities:
+            reachable_drivers = []
+            for driver in d.drivers:
+                if self.bfsCanReach(driver['start_city'],city_name):
+                    if driver['name'] not in reachable_drivers:
+                        reachable_drivers.append(driver['name'])
+            
+            if reachable_drivers:
+                print(f"\nThe drivers that can be delivered to the city '{city_name}': ")
+                print(", ".join(reachable_drivers))
+            else:
+                print("\nNo drivers found.")
+        else:
+            print(f"\n{city_name} is not present in the system.")
+
+    
+    def bfsCanReach(self, startCityNode, city_name_search):
+        visited = []
+        queue = []
+
+        visited.append(startCityNode)
+        queue.append(startCityNode)
+
+        while queue:
+            m = queue.pop(0)
+            # print(m, end=" ")
+            if city_name_search == m:
+                return True
+            
+            for neighbour in self.graph_cities[m]:
+                if neighbour not in visited:
+                    visited.append(neighbour)
+                    queue.append(neighbour)
+        
+        return False
 
     def checkCityAvailability(self, city_name):
         if city_name in self.graph_cities:
@@ -216,7 +263,8 @@ def citiesMenu():
                 city_name = input("\nEnter the city name to prints all cities that can be reached from: ")
                 c.printNeighboringCities(city_name)
             elif user_input == '4':
-                c.printDriversByCity()
+                city_name = input("\nEnter the city name: ")
+                c.printDriversReachedByCity(city_name)
             elif user_input == '5':
                 city1 = input("\nEnter the first city: ")
                 city2 = input("Enter the second city: ")
@@ -256,31 +304,41 @@ def main():
 d = Drivers()
 c = Cities()
 
-c.addCityNode("Beirut")
-c.addCityNode("Tripoli")
-c.addCityNode("Sidon")
-c.addCityNode("Byblos")
-c.addCityNode("Zahle")
-c.addCityNode("Jounieh")
-c.addCityNode("Baalbek")
-c.addCityNode("Tyre")
-c.addCityNode("Batroun")
-c.addCityNode("Akkar")
-c.addCityNode("Bshare")
-c.addCityNode("Jbeil")
+c.addCityNode("B")
+c.addCityNode("T")
+c.addCityNode("S")
+c.addCityNode("C")
+c.addCityNode("Z")
+c.addCityNode("J")
+c.addCityNode("F")
+c.addCityNode("H")
+c.addCityNode("U")
+c.addCityNode("A")
+c.addCityNode("W")
+c.addCityNode("V")
+c.addCityNode("M")
+c.addCityNode("I")
+c.addCityNode("G")
+c.addCityNode("K")
+c.addCityNode("L")
+c.addCityNode("O")
+c.addCityNode("P")
 
-c.addEdge("Beirut", "Tripoli")
-c.addEdge("Beirut", "Sidon")
-c.addEdge("Beirut", "Byblos")
-c.addEdge("Beirut", "Jounieh")
-c.addEdge("Beirut", "Zahle")
-c.addEdge("Tripoli", "Byblos")
-c.addEdge("Tripoli", "Akkar")
-c.addEdge("Tripoli", "Batroun")
-c.addEdge("Akkar", "Bshare")
-c.addEdge("Byblos", "Jounieh")
-c.addEdge("Sidon", "Tyre")
-c.addEdge("Zahle", "Baalbek")
+c.addEdge("B", "T")
+c.addEdge("B", "S")
+c.addEdge("B", "C")
+c.addEdge("B", "J")
+c.addEdge("B", "Z")
+c.addEdge("T", "C")
+c.addEdge("T", "A")
+c.addEdge("T", "U")
+c.addEdge("A", "W")
+c.addEdge("C", "J")
+c.addEdge("S", "H")
+c.addEdge("Z", "F")
+c.addEdge("M", "I")
+c.addEdge("I", "G")
+c.addEdge("K", "L")
 
 # print(c.graph_cities)
 main()
