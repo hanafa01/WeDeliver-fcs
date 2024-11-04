@@ -11,19 +11,6 @@ class Drivers:
             {"id": "ID008", "name": "User8", "start_city": "O"},
             {"id": "ID009", "name": "User9", "start_city": "B"},
         ]
-        
-        # self.drivers = [
-        #     {
-        #         'id': 'ID001',
-        #         'name': 'User1',
-        #         'start_city': 'Beirut'
-        #     },
-        #     {
-        #         'id': 'ID002',
-        #         'name': 'User2',
-        #         'start_city': 'Akkar'
-        #     }
-        # ]
         self.total_drivers = len(self.drivers)
 
     def viewDrivers(self):
@@ -46,7 +33,6 @@ class Drivers:
                     break
 
             if user_input == 'no':
-                #checknow \n                
                 while True:
                     user_input = input("\nWould you like to add another start city name ? (yes/no) ").strip().lower()  
                     if user_input not in ['yes', 'no']:
@@ -100,7 +86,6 @@ class Cities:
         sorted_cities = sorted(self.graph_cities.keys(), reverse=True)
         print(", ".join(sorted_cities))
 
-    #checknow
     def searchCity(self, search_city):
         cities = self.graph_cities.keys()
 
@@ -144,7 +129,6 @@ class Cities:
         else:
             print(f"\n{city_name} is not present in the system.")
 
-    
     def bfsCanReach(self, startCityNode, city_name_search):
         visited = []
         queue = []
